@@ -1,5 +1,5 @@
 
-# WebXR Template for Babylon.js
+# Babylon.js Template
 
 Build once:
 
@@ -7,7 +7,7 @@ Build once:
 npm run build
 ```
 
-Start web server and open browser:
+Start web server and open browser w/ esbuild watching:
 ```
 npm run watch
 ```
