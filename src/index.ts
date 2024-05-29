@@ -9,5 +9,6 @@ if (isWebWorker) {
         const canvas = document.getElementById('renderCanvas') as HTMLCanvasElement;
         const app = new Main(canvas);
         app.run();
+        app.startXR();
     });
 }
