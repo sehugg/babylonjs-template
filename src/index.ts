@@ -1,7 +1,13 @@
 import { Main } from "./main";
 
-if (typeof importScripts === 'function') {
+const isWebWorker = typeof (window as any)['WorkerGlobalScope'] === 'function';
+
+if (isWebWorker) {
     // TODO: web worker
 } else {
-    new Main().startXR();
+    window.addEventListener('DOMContentLoaded', () => {
+        const canvas = document.getElementById('renderCanvas') as HTMLCanvasElement;
+        const app = new Main(canvas);
+        app.run();
+    });
 }

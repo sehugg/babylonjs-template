@@ -1,22 +1,26 @@
 {
   "name": "webxr-template",
-  "version": "0.0.2",
-  "description": "",
+  "version": "0.0.3",
+  "description": "WebXR/Vite.js Template",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && esbuild src/index.ts --format=esm --bundle --minify --sourcemap --target=es2020 --outfile=./gen/bundle.js",
-    "test": "tsc && node ./src/tests.js",
-    "watch": "tsc && esbuild src/index.ts --format=esm --bundle --sourcemap --target=es2020 --outfile=./www/gen/bundle.js --servedir=www"
+    "dev": "vite --open",
+    "build": "tsc && vite build",
+    "preview": "tsc && vite build && vite preview --host --open"
   },
-  "author": "",
+  "typeRoots": [
+    "node_modules/@types",
+    "src/@types"
+  ],
+  "author": "Steven Hugg",
   "license": "ISC",
   "dependencies": {
-    "@babylonjs/core": "^6.10.0",
-    "@babylonjs/materials": "^6.10.0",
-    "esbuild": "^0.18.10",
-    "typescript": "^5.1.6"
+    "@babylonjs/core": "^7.8.2",
+    "@babylonjs/materials": "^7.8.2"
   },
   "devDependencies": {
-    "@babylonjs/inspector": "^6.10.0"
+    "@babylonjs/inspector": "^7.8.2",
+    "typescript": "^5.1.6",
+    "vite": "^5.2.12"
   }
 }

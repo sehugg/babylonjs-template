@@ -1,14 +1,19 @@
 
-# Babylon.js Template
+# Babylon.js/Vite Template
+
+Start dev web server:
+```
+npm run dev
+```
+
+Start production preview web server:
+```
+npm run preview
+```
 
 Build once:
 
 ```
 npm run build
-```
-
-Start web server and open browser w/ esbuild watching:
-```
-npm run watch
 ```
 

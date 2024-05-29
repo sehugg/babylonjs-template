@@ -1,24 +1,19 @@
 
 
-var debug = false;
-/*
 // https://doc.babylonjs.com/divingDeeper/developWithBjs/treeShaking#almighty-inspector
-debug = true;
+var debug = true;
 import "@babylonjs/core/Debug/debugLayer"; // Augments the scene with the debug methods
 import "@babylonjs/inspector"; // Injects a local ES6 version of the inspector to prevent 
-*/
 
 import * as BABYLON from "@babylonjs/core";
 
-var timeStep = 1 / 60; //TODO?
-
 export class Main {
+    engine: BABYLON.Engine;
     scene: BABYLON.Scene;
     xr: BABYLON.WebXRDefaultExperience | null = null;
 
-    constructor() {
-        const canvas = document.getElementById("maincanvas") as HTMLCanvasElement; // Get the canvas element
-        const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
+    constructor(canvas: HTMLCanvasElement) {
+        const engine = this.engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
         const scene = this.scene = new BABYLON.Scene(engine);
 
         scene.createDefaultEnvironment(); // plane + skybox
@@ -29,20 +24,32 @@ export class Main {
     
         const box = BABYLON.MeshBuilder.CreateBox("box", {height: 1, width: 0.75, depth: 0.25});
     
-        // Register a render loop to repeatedly render the scene
-        engine.runRenderLoop(() => {
-            scene.render();
-            timeStep = scene.deltaTime / 1000;
-            this.update();
-        });
-
         // Watch for browser/canvas resize events
         window.addEventListener("resize", function () {
             engine.resize();
         });
     }
 
-    update() {
+    debug(debugOn: boolean = true) {
+        if (debugOn) {
+            this.scene.debugLayer.show({ overlay: true });
+        } else {
+            this.scene.debugLayer.hide();
+        }
+    }
+
+    run() {
+        const isDebug = (import.meta as any).env.DEV;
+        this.debug(isDebug);
+
+        this.engine.runRenderLoop(() => {
+            this.scene.render();
+            const timeStep = this.scene.deltaTime / 1000;
+            this.update(timeStep);
+        });
+    }
+
+    update(timeStep: number) {
     }
 
     async startXR() {
